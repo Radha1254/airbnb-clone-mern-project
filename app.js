@@ -19,14 +19,11 @@ const userRouter = require("./routes/user.js");
 
 const session = require("express-session");
 const MongoStore = require('connect-mongo').default;
-console.log(MongoStore);
-
 
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
-// const mongo_Url = "mongodb://127.0.0.1:27017/wanderfast";
 const dburl = process.env.ATLASDB_URL;
 main().then(() =>{
     console.log("connected to db");
@@ -47,7 +44,7 @@ app.use(express.static(path.join(__dirname, "/public")));
 const store =  MongoStore.create({
     mongoUrl: dburl,
     crypto: {
-        secret: "mysupersecretstring",
+        secret: process.env.SECRET,
     },
     touchAfter: 24 * 3600,
 
@@ -59,7 +56,7 @@ store.on("error", (err) =>{
 
 const sessionOptions = {
     store: store,
-    secret: "mysupersecretstring",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -99,11 +96,15 @@ app.use((req, res, next) =>{
 // res.send(registerUser);
 //     });
 
-
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
 
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter);
 app.use("/", userRouter);
+
+
 
 app.use((req, res, next) =>{
     next(new ExpreesErr(404, "page not found"));
@@ -115,6 +116,7 @@ app.use((err, req, res, next) =>{
 // res.status(statusCode).send(message);
     
 });
-app.listen(8080, () =>{
-    console.log("server listening to port 8080");
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () =>{
+    console.log(`server listening to port ${PORT}`);
 });
