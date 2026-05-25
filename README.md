@@ -8,10 +8,10 @@ A full-stack Airbnb-inspired web application built using the MERN stack. The pla
 
 ## 🚀 Features
 
-* User authentication (login/register) *(if implemented)*
+* User authentication
 * Create, read, update, and delete property listings
 * View detailed listing pages
-* Image upload support *(if implemented)*
+* Image upload support 
 * Responsive UI for better user experience
 * RESTful API integration between frontend and backend
 
@@ -25,7 +25,7 @@ A full-stack Airbnb-inspired web application built using the MERN stack. The pla
 * HTML5
 * CSS3
 * JavaScript
-* Bootstrap / Tailwind *(as used in project)*
+* Bootstrap 
 
 ### Backend
 
@@ -41,8 +41,8 @@ A full-stack Airbnb-inspired web application built using the MERN stack. The pla
 
 * Git & GitHub
 * REST APIs
-* JWT Authentication *(if used)*
-* Cloudinary / Multer *(if used for image upload)*
+* JWT Authentication 
+* Cloudinary / Multer 
 
 ---
 
